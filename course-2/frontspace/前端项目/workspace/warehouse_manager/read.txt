@@ -1,0 +1,71 @@
+一.前端工作，准备第三方包文件
+    yarn dev
+二、后端项目
+    1.创建boot项目  //划分包层次
+        contraller   访问控制器类
+        mapper  //接口
+        config  //配置类
+        pojo
+        service/impl  //
+        utils   //工具类
+    2.    resources
+              //application.properties
+              //mapper目录（mybatis的sql映射文件）
+    3.引入依赖
+
+    4.启动类配置。
+         在启动类中配置
+            //@MapperScan 指名mapper接口所在的包，然后自动为mapper接口创建我们的代理的对象，并加入到IOC容器
+            @MapperScan(basePackages="com.xiaowang.mapper")
+        1）#------配置项目的访问路径----
+          server.servlet.context-path=/warehouse
+          #-------项目的访问端口---
+          server.port=9999
+        2）springboot整合mybatis，搭建mybatis环境的三个步骤
+            1.引入mybatis和mysql依赖
+            2.对mybatis进行配置
+            3.启动类上表上注解
+    5.Redis的配置
+      #redis的ip
+      spring.redis.host=127.0.0.1
+      #reais端口号
+      spring.redis.port=6379
+      spring.redis.database=0
+    6.token 令牌 会话技术   多长时间免登录
+     常见的会话技术
+        session
+            弊端只适合单体应用，不适合微服务集群的项目
+        token
+            适合用于分布式微服务的项目的会话技术
+        jwt token
+            三部分组成
+                头部
+                {json串}
+                载体
+                {json 用户信息}
+                签名
+                {}
+    7.登录页
+        1）生成验证码图片
+            http://localhost:9999/warehouse
+            /captcha/captchaImage  ---接口名：服务器后端生成一张验证码的图片，然后相应给前端，以img标签表示
+        2.登录
+             http://localhost:3000/login
+            http://localhost:3000/api/login  前端项目要vue的目录
+        3.登录的限制
+        4.获取登录用户的信息
+        5.
+    8.接口的概念
+        1.interface:表示对外暴露的规则，里边定义的全是抽象的方法和全局的变量
+        2.api接口 url接口:请求url接口
+    9.打开idea的多个服务 view--windows--service
+    10.登录限制
+       配制过滤器
+            回顾springboot中配置原生servlet中的过滤器
+                1)自定义过滤器 -- 定义一个filter接口的实现类并重写dofilter()方法，dofilter()
+                方法是过滤器中请求执行的内容
+                2）向ioc容器配置FilterRegistrationBean()的bean对象，在将我们自定义的servlet的过v其
+                    注册FilterRegistrationBean的bean‘，注册过滤器
+    11.获取登录的信息
+         http://localhost:3000/api/curr-user?_t=1709029567537
+            curr-user 拿到token工具类解析token的封装方法拿到从token中的
